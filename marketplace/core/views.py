@@ -1,13 +1,15 @@
 from django.shortcuts import render
-from marketplace.item.models import Category, Item
+from item.models import Category, Item
+from .forms import SignupForm
 
-from marketplace.core.templates.core.forms import SignupForm
+from .forms import SignupForm
 
 # home page
 # request: info della richiesta (browser, GET/POST, ..), da mettere in ogni view
 def index(request):
     items = Item.objects.filter(is_sold=False)[0:6]  # solo quelli in vendita, max 6
     categories = Category.objects.all()  # tutte le categorie
+
     return render(request, 'core/index.html', {
         'categories': categories,
         'items': items,
