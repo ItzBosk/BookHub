@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="341fc5bf-6d00-4b18-8e0c-dae9774b69c1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/marketplace/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/marketplace/core/templates/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/marketplace.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/marketplace.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marketplace/core/templates/core/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/core/templates/core/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marketplace/core/templates/core/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/core/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/core/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/core/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/marketplace/core/templates/core/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/core/templates/core/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marketplace/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/marketplace/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/core/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -121,6 +116,7 @@
       <workItem from="1702423307050" duration="2191000" />
       <workItem from="1702425523573" duration="559000" />
       <workItem from="1702475907477" duration="1870000" />
+      <workItem from="1702504705413" duration="1291000" />
     </task>
     <servers />
   </component>

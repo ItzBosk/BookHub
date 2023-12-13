@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from item.models import Category, Item
 from .forms import SignupForm
 
@@ -20,5 +20,13 @@ def contact(request):
     return render(request, 'core/contact.html')
 
 def signup(request):
-    form = SignupForm()
+    if request.method == 'POST': #allora vuol dire che ho compilato la form
+        form = SignupForm(request.POST)
+
+        if form.is_valid(): #se ho compilato correttamente, salvo i dati
+            form.save()
+            return redirect('/login/') #dopo aver salvato i dati faccio redirect a login
+    else: #se non e' una post, faccio vuoto
+        form = SignupForm()
+
     return render(request, 'core/signup.html', {'form': form})
