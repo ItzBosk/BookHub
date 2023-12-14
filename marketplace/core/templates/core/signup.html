@@ -31,9 +31,9 @@
                 <div class="mb-3 p-6 bg-red-100 rounded-xl">
                     {% for field in form %}
                         {{  field.errors }}
-                    {%  endfor %}
+                    {% endfor %}
 
-                    {{form.non_field_errors}}
+                    {{ form.non_field_errors }}
                 </div>
             {% endif %}
 
