@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# redirect log in/ log out
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'    # quando già loggato
+LOGOUT_REDIRECT_URL = '/'
+
 
 # Application definition
 
