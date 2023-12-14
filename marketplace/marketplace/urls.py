@@ -11,5 +11,6 @@ urlpatterns = [
     path('', include('core.urls')),
     path('items/', include('item.urls')),   # collega ogni url che inizia con item al file item/urls.py
     # path('contact/', contact, name='contact'),
+    path('dashboard/', include('dashboard.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)    # gestione immagini
