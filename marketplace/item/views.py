@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 from .models import Item
-from .forms import NewItemForm
+from .forms import NewItemForm, EditItemForm
 
 # ricerca elemento in base a richiesta e primary key
 def detail(request, pk):
@@ -33,9 +33,26 @@ def new(request):
     })
 
 @login_required
-# pk = id prodotto da elininare
 def delete(request, pk):
+    # # pk = id prodotto da elininare
     item = get_object_or_404(Item, pk=pk, created_by=request.user)
     item.delete()
 
     return redirect('dashboard:index')    # redirect a index
+
+@login_required
+def edit(request, pk):
+    item = get_object_or_404(Item, pk=pk, created_by=request.user)
+
+    if request.method == 'POST':
+        form = EditItemForm(request.POST, request.FILES, instance=item)     # salvo dati e file caricati
+        if form.is_valid():
+            form.save()
+            return redirect('item:detail', pk=item.id)  # salvataggio fatto, redirect a pagina prodotto
+    else:   # se fosse una GET request
+        form = EditItemForm(instance=item)
+
+    return render(request, 'item/form.html', {
+        'form': form,
+        'title': 'Edit item',
+    })
