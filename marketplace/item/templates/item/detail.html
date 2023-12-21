@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 
-{% block title %}{{ item.name }}{% endblock %}
+{% block title %}{{ item.title }}{% endblock %}
 
 {% block content %}
 <div class="grid grid-cols-5 gap-6">
@@ -11,9 +11,15 @@
 
     <!-- info prodotto -->
     <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
-        <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
+        <h1 class="mb-6 text-3xl">{{ item.title }}</h1>
+        <p class="text-gray-500"><strong>Author: </strong>{{ item.author }}</p>
+        <p class="text-gray-500"><strong>Genre: </strong>{{ item.genre }}</p>
+        <p class="text-gray-500"><strong>Language: </strong>{{ item.language }}</p>
+        <p class="text-gray-500"><strong>Format: </strong>{{ item.format }}</p>
+        <p class="text-gray-500"><strong>Number of pages: </strong>{{ item.number_of_pages }}</p>
+        <p class="text-gray-500"><strong>Cover color: </strong>{{ item.cover_color }}</p>
         <p class="text-gray-500"><strong>Price: </strong>{{ item.price }}</p>
-        <p class="text-gray-500"><strong>Seller: </strong>{{ item.created_by.username }}</p><br>
+        <p class="text-gray-500"><strong>Seller: </strong>{{ item.created_by.username }}</p>
 
         {% if item.description %}
         <p class="text-gray-700">
@@ -48,9 +54,9 @@
                         <div>
                             <img src="{{ item.image.url }}" class="rounded-t-xl">
                         </div>
-                        <!-- nome e prezzo -->
+                        <!-- titolo e prezzo -->
                         <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="text-2xl">{{ item.name }}</h2>
+                            <h2 class="text-2xl">{{ item.title }}</h2>
                             <p class="text-gray-500">Price: {{ item.price }}</p>
                         </div>
                     </a>

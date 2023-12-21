@@ -1,24 +1,64 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-
-class Category(models.Model):
+# generi letterari
+class Genre(models.Model):
     name = models.CharField(max_length=255)
 
-    # fix nome app
+    # fix nome
     class Meta:
         ordering = ('name',)
-        verbose_name_plural = 'Categories'
+        verbose_name_plural = 'Genres'
 
-    # nomi categorie (override string representation)
+    # nomi generi (override string representation)
     def __str__(self):
         return self.name
 
+# formato del libro
+class Format(models.Model):
+    name = models.CharField(max_length=255)
+
+    # fix nome
+    class Meta:
+        ordering = ('name',)
+        verbose_name_plural = 'Formats'
+
+    def __str__(self):
+        return self.name
+
+# colori copertine
+class CoverColor(models.Model):
+    name = models.CharField(max_length=255)
+
+    # fix nome
+    class Meta:
+        ordering = ('name',)
+        verbose_name_plural = 'Cover colors'
+
+    def __str__(self):
+        return self.name
+
+# lingua
+class Language(models.Model):
+    name = models.CharField(max_length=255)
+
+    # fix nome
+    class Meta:
+        ordering = ('name',)
+        verbose_name_plural = 'Languages'
+
+    def __str__(self):
+        return self.name
 
 class Item(models.Model):
-    category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
+    genre = models.ForeignKey(Genre, related_name='items', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)  # può anche non esserci
+    format = models.ForeignKey(Format, related_name='items', on_delete=models.CASCADE)
+    language = models.ForeignKey(Language, related_name='items', on_delete=models.CASCADE,)
+    number_of_pages = models.FloatField(default=0.0)
+    cover_color = models.ForeignKey(CoverColor, related_name='items', on_delete=models.CASCADE)
     price = models.FloatField()
     image = models.ImageField(upload_to="item_images", blank=True,
                               null=True)  # specifica posizione image, se non esiste django crea la cartella
@@ -29,4 +69,4 @@ class Item(models.Model):
 
     # nomi prodotti (override string representation)
     def __str__(self):
-        return self.name
+        return self.title

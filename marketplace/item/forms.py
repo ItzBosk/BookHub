@@ -7,16 +7,32 @@ from .models import Item
 class NewItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ('category', 'name', 'description', 'price', 'image')
+        fields = ('genre', 'title', 'author', 'description', 'format', 'language', 'number_of_pages',
+                  'cover_color', 'price', 'image')
         widgets = {
-            'category': forms.Select(attrs={
+            'genre': forms.Select(attrs={
                 'class': 'w-half py-4 px-6 rounded-xl border'   # basta poco spazio
             }),
-            'name': forms.TextInput(attrs={
+            'title': forms.TextInput(attrs={
+                'class': 'w-full py-4 px-6 rounded-xl border'
+            }),
+            'author': forms.TextInput(attrs={
                 'class': 'w-full py-4 px-6 rounded-xl border'
             }),
             'description': forms.Textarea(attrs={
-                'class': 'w-full py-4 px-6 rounded-xl border'   # lascio più spazio
+                'class': 'w-full py-4 px-6 rounded-xl border'  # lascio più spazio
+            }),
+            'format': forms.Select(attrs={
+                'class': 'w-half py-4 px-6 rounded-xl border'  # basta poco spazio
+            }),
+            'language': forms.Select(attrs={
+                'class': 'w-half py-4 px-6 rounded-xl border'
+            }),
+            'number_of_pages': forms.TextInput(attrs={
+                'class': 'w-half py-4 px-6 rounded-xl border'
+            }),
+            'cover_color': forms.Select(attrs={
+                'class': 'w-half py-4 px-6 rounded-xl border'
             }),
             'price': forms.TextInput(attrs={
                 'class': 'w-half py-4 px-6 rounded-xl border'
@@ -29,13 +45,32 @@ class NewItemForm(forms.ModelForm):
 class EditItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ('name', 'description', 'price', 'image', 'is_sold')
+        fields = ('genre', 'title', 'author', 'description', 'format', 'language', 'number_of_pages',
+                  'cover_color', 'price', 'image')
         widgets = {
-            'name': forms.TextInput(attrs={
+            'genre': forms.Select(attrs={
+                'class': 'w-half py-4 px-6 rounded-xl border'  # basta poco spazio
+            }),
+            'title': forms.TextInput(attrs={
+                'class': 'w-full py-4 px-6 rounded-xl border'
+            }),
+            'author': forms.TextInput(attrs={
                 'class': 'w-full py-4 px-6 rounded-xl border'
             }),
             'description': forms.Textarea(attrs={
-                'class': 'w-full py-4 px-6 rounded-xl border'   # lascio più spazio
+                'class': 'w-full py-4 px-6 rounded-xl border'  # lascio più spazio
+            }),
+            'format': forms.Select(attrs={
+                'class': 'w-half py-4 px-6 rounded-xl border'  # basta poco spazio
+            }),
+            'language': forms.Select(attrs={
+                'class': 'w-half py-4 px-6 rounded-xl border'
+            }),
+            'number_of_pages': forms.TextInput(attrs={
+                'class': 'w-half py-4 px-6 rounded-xl border'
+            }),
+            'cover_color': forms.Select(attrs={
+                'class': 'w-half py-4 px-6 rounded-xl border'
             }),
             'price': forms.TextInput(attrs={
                 'class': 'w-half py-4 px-6 rounded-xl border'
@@ -43,4 +78,4 @@ class EditItemForm(forms.ModelForm):
             'image': forms.FileInput(attrs={
                 'class': 'w-half py-4 px-6 rounded-xl border'
             })
-    }
+        }

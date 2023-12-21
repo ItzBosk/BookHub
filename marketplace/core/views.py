@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from item.models import Category, Item
+from item.models import Genre, Item
 from .forms import SignupForm
 
 from .forms import SignupForm
@@ -8,10 +8,10 @@ from .forms import SignupForm
 # request: info della richiesta (browser, GET/POST, ..), da mettere in ogni view
 def index(request):
     items = Item.objects.filter(is_sold=False)[0:6]  # solo quelli in vendita, max 6
-    categories = Category.objects.all()  # tutte le categorie
+    genres = Genre.objects.all()  # tutti i generi
 
     return render(request, 'core/index.html', {
-        'categories': categories,
+        'genres': genres,
         'items': items,
     })  # ritorna un template
 

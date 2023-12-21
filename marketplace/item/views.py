@@ -1,38 +1,37 @@
-from django.db.models import Q
+from django.db.models import Q      # permette tramite una query di cercare nelle descrizioni degli oggetti
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
-from .models import Item, Category
+from .models import Item, Genre
 from .forms import NewItemForm, EditItemForm
 
 # lista degli item non venduti
 def items(request):
-    query= request.GET.get('query', '') # permette la ricerca dei vari item nella sidebar
-    category_id= request.GET.get('category', 0)
-    categories = Category.objects.all()
+    query = request.GET.get('query', '')    # permette la ricerca dei vari item nella sidebar
+    genre_id = request.GET.get('genre', 0)
+    genres = Genre.objects.all()
     items = Item.objects.filter(is_sold=False)
 
+    # ricerca per genere, mostra solo libri di quel genere
+    if genre_id:
+        items = items.filter(genre_id=genre_id)
 
-    # ricerca per categorie, mostra solo oggetti di quella categoria
-    if category_id:
-        items = items.filter(category_id=category_id)
-
-
-    #filtro le query con titolo o descrizione oggetto
+    # filtro le query con titolo o descrizione oggetto
     if query:
-        items = items.filter(Q(name__icontains=query) | Q(description__icontains=query))
+        # Q permette di cercare in campi multipli
+        items = items.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(author__icontains=query))
 
     return render(request, 'item/items.html', {
         'items': items,
         'query': query,
-        'categories': categories,
-        'category_id' : int(category_id)
+        'genres': genres,
+        'genre_id' : int(genre_id)
     })
 
 # ricerca elemento in base a richiesta e primary key
 def detail(request, pk):
     item = get_object_or_404(Item, pk=pk)   # se non presente da errore
-    related_items = Item.objects.filter(category=item.category, is_sold=False).exclude(pk=pk)[0:3]
+    related_items = Item.objects.filter(genre=item.genre, is_sold=False).exclude(pk=pk)[0:3]
 
     return render(request, 'item/detail.html', {
         'item': item,

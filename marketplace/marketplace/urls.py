@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-#from marketplace.core.views import index, contact
+# from marketplace.core.views import index, contact
 
 urlpatterns = [
     # path('', index, name='index'),    # path vuoto perché home page
