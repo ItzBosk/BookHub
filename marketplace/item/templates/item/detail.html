@@ -3,35 +3,39 @@
 {% block title %}{{ item.title }}{% endblock %}
 
 {% block content %}
-<div class="grid grid-cols-5 gap-6">
+<div class="grid grid-cols-2 gap-6">
     <!-- immagine -->
     <div class="col-span-3">
-        <img src="{{ item.image.url }}" class="rounded-xl">
+        <img src="{{ item.image.url }}" class="rounded-xl" style="width: 100%; max-width: 300px; height: auto;">
     </div>
 
     <!-- info prodotto -->
-    <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
+    <div class="p-6 bg-gray-100 rounded-xl">
         <h1 class="mb-6 text-3xl">{{ item.title }}</h1>
-        <p class="text-gray-500"><strong>Author: </strong>{{ item.author }}</p>
-        <p class="text-gray-500"><strong>Genre: </strong>{{ item.genre }}</p>
-        <p class="text-gray-500"><strong>Language: </strong>{{ item.language }}</p>
-        <p class="text-gray-500"><strong>Format: </strong>{{ item.format }}</p>
-        <p class="text-gray-500"><strong>Number of pages: </strong>{{ item.number_of_pages }}</p>
-        <p class="text-gray-500"><strong>Cover color: </strong>{{ item.cover_color }}</p>
-        <p class="text-gray-500"><strong>Price: </strong>{{ item.price }}</p>
-        <p class="text-gray-500"><strong>Seller: </strong>{{ item.created_by.username }}</p>
+        <div class="grid grid-cols-1">
+            <p><strong>Author:</strong> {{ item.author }}</p>
+            <p><strong>Genre:</strong> {{ item.genre }}</p>
+            <p><strong>Language:</strong> {{ item.language }}</p>
+            <p><strong>Format:</strong> {{ item.format }}</p>
+            <p><strong>Number of Pages:</strong> {{ item.number_of_pages }}</p>
+            <p><strong>Cover Color:</strong> {{ item.cover_color }}</p>
+        </div>
+
+        <div class="mt-6 p-6 bg-white rounded-xl">
+            <p><strong>Price:</strong> ${{ item.price }}</p>
+            <p><strong>Seller:</strong> {{ item.created_by.username }}</p>
+        </div>
 
         {% if item.description %}
-        <p class="text-gray-700">
-            <strong class="text-gray-500">Description:</strong><br>
-            {{ item.description }}
-        </p>
+        <div class="mt-6 p-6 bg-white rounded-xl">
+            <p><strong>Description:</strong></p>
+            <p class="text-gray-700">{{ item.description }}</p>
+        </div>
         {% endif %}
 
         {% if item.description %}
             <div class="mt-6 p-6 bg-white rounded-xl">
                 <p>This is your item</p>
-
                 <a href="{% url 'item:edit' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl">Edit</a>
                 <a href="{% url 'item:delete' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl">Delete</a>
             </div>
@@ -43,25 +47,25 @@
 </div>
 
 <!-- prodotti correlati -->
-    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
-        <h2 class="mb-12 text-2xl text-center">Related items</h2>
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">Related items</h2>
 
-        <div class="grid grid-cols-3 gap-3">
-            {% for item in related_items %}
-                <div>
-                    <a href="{% url 'item:detail' item.id %}">
-                        <!-- immagine prodotto -->
-                        <div>
-                            <img src="{{ item.image.url }}" class="rounded-t-xl">
-                        </div>
-                        <!-- titolo e prezzo -->
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="text-2xl">{{ item.title }}</h2>
-                            <p class="text-gray-500">Price: {{ item.price }}</p>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+    <div class="grid grid-cols-3 gap-3">
+        {% for item in related_items %}
+            <div>
+                <a href="{% url 'item:detail' item.id %}">
+                    <!-- immagine prodotto -->
+                    <div>
+                        <img src="{{ item.image.url }}" class="rounded-t-xl">
+                    </div>
+                    <!-- titolo e prezzo -->
+                    <div class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl">{{ item.title }}</h2>
+                        <p class="text-gray-500">Price: {{ item.price }}</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}
