@@ -22,20 +22,22 @@ def results(request, query_id):
         query_filter &= Q(title__icontains=user_query.title)
     if user_query.author:
         query_filter &= Q(author__icontains=user_query.author)
-    if user_query.genre:
-        query_filter &= Q(genre__icontains=user_query.genre)                #
     if user_query.description:
         query_filter &= Q(description__icontains=user_query.description)
-    if user_query.format:
-        query_filter &= Q(format__icontains=user_query.format)              #
-    if user_query.language:
-        query_filter &= Q(language__icontains=user_query.language)          #
 
+    # se il campo è una ForeignKey
+    if user_query.genre:
+        query_filter &= Q(genre__name__icontains=user_query.genre.name)
+    if user_query.format:
+        query_filter &= Q(format__name__icontains=user_query.format.name)
+    if user_query.language:
+        query_filter &= Q(language__name__icontains=user_query.language.name)
+
+    # range di prezzo
     if user_query.min_price is not None:
         query_filter &= Q(price__gte=user_query.min_price)
     if user_query.max_price is not None:
         query_filter &= Q(price__lte=user_query.max_price)
-
 
     items = Item.objects.filter(query_filter)
     return render(request, 'marketplace/query_results.html', {'results': items})
@@ -65,4 +67,4 @@ def edit(request, query_id):
 def delete(request, query_id):
     query = get_object_or_404(UserQuery, pk=query_id, user=request.user)
     query.delete()
-    return redirect(past_researches, request=request)
+    return redirect(past_researches)

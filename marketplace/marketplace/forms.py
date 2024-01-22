@@ -2,8 +2,14 @@ from django import forms
 from .models import UserQuery
 
 class QueryForm(forms.ModelForm):
-    min_price = forms.FloatField(required=False)
-    max_price = forms.FloatField(required=False)
+    min_price = forms.FloatField(required=False, widget=forms.NumberInput(attrs={
+        'class': 'w-half py-4 px-6 rounded-xl border',
+        'step': 'any',  # Allows decimal values
+    }))
+    max_price = forms.FloatField(required=False, widget=forms.NumberInput(attrs={
+        'class': 'w-half py-4 px-6 rounded-xl border',
+        'step': 'any',
+    }))
 
     class Meta:
         model = UserQuery
