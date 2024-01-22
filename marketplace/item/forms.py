@@ -12,7 +12,7 @@ class NewItemForm(forms.ModelForm):
         widgets = {
             'genre': forms.Select(attrs={
                 'class': 'w-half py-4 px-6 rounded-xl border'   # basta poco spazio
-            }),
+            }), 
             'title': forms.TextInput(attrs={
                 'class': 'w-full py-4 px-6 rounded-xl border'
             }),

@@ -44,7 +44,7 @@ def new(request):
     if request.method == 'POST':
         form = NewItemForm(request.POST, request.FILES)     # salvo dati e file caricati
         if form.is_valid():
-            item = form.save(commit=False)  # non salvo subito nel db perché non saprei chi ha creato il prodotto
+            item = form.save(commit=False)  # non salvo subito nel db perché non saprei chi ha creato la search
             item.created_by = request.user
             item.save()
             return redirect('item:detail', pk=item.id)  # salvataggio fatto, redirect a pagina prodotto

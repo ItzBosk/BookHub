@@ -30,10 +30,10 @@ def query_results(request, query_id):
 @login_required
 def new_research(request):
     if request.method == 'POST':
-        form = QueryForm(request.POST, request.FILES)     # salvo dati e file caricati
+        form = QueryForm(request.POST)     # salvo dati
         if form.is_valid():
             query = form.save(commit=False)  # non salvo subito nel db perché non saprei chi ha creato il prodotto
-            query.created_by = request.user
+            query.user = request.user
             query.save()
             return redirect('query_results', pk=query.id)  # research salvata, redirect a risultati query
     else:   # se fosse una GET request
