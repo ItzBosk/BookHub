@@ -3,16 +3,23 @@
 {% block title %}Researches{% endblock %}
 
 {% block content %}
-    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl research-container">
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl research-container">
         <h2 class="mb-12 text-2xl text-center">My researches</h2>
 
-        <div class="research-top">
+        <div class="mb-6">
             <a href="{% url 'new_research' %}" class="new-research-btn px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">New research</a>
         </div>
 
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 gap-3">
             {% for query in past_queries %}
-                <a href="{% url 'query_results' query.id %}">View results for Research {{ query.id }}</a>
+                <div class="query-box p-4 border border-gray-300 rounded-lg flex justify-between items-center">
+                    <span class="text-lg">{{ query.name }}</span>
+                    <div>
+                        <a href="{% url 'results' query.id %}" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">View Results</a>
+                        <a href="#" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Edit</a>
+                        <a href="#" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Delete</a>
+                    </div>
+                </div>
             {% endfor %}
         </div>
     </div>

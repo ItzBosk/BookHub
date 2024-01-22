@@ -16,5 +16,6 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('admin/', admin.site.urls),
     path('researches_list/', views.past_researches, name='past_researches'),
-    path('form/', views.new_research, name='new_research'),
+    path('form/', views.new, name='new_research'),
+    path('query_results/<int:query_id>/', views.results, name='results'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)    # gestione immagini

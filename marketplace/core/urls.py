@@ -5,7 +5,7 @@ from django.urls import path, include
 
 from . import views
 from .forms import LoginForm
-from marketplace.views import past_researches
+from marketplace.views import *
 
 app_name = 'core'
 urlpatterns = [
@@ -14,4 +14,6 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/', auth_views.LoginView.as_view(template_name='core/login.html' , authentication_form=LoginForm), name='login'),
     path('user_past_queries/', past_researches, name='past_researches'),
+    path('results/', results, name='results'),
+    path('delete/', delete, name='delete'),
 ]

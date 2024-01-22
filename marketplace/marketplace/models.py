@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from item.models import Genre, Format, Language, CoverColor, Item
 
 class UserQuery(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     genre = models.ForeignKey(Genre, related_name='user_queries', on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=255, blank=True, null=True)
@@ -16,7 +17,7 @@ class UserQuery(models.Model):
     min_price = models.FloatField(blank=True, null=True)
     max_price = models.FloatField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    results = models.ManyToManyField(Item, blank=True)  # Field to store query results
+    results = models.ManyToManyField(Item, blank=True)  # store query results
 
     def __str__(self):
-        return f"Search Query by {self.user.username}"
+        return f"Research: {self.name} made by: {self.user.username}"

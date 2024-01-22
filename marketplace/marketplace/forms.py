@@ -1,17 +1,16 @@
 from django import forms
-from django.db import models
-from item.models import Item
 from .models import UserQuery
 
-class QueryForm(forms.Form):
+class QueryForm(forms.ModelForm):
     min_price = forms.FloatField(required=False)
     max_price = forms.FloatField(required=False)
 
     class Meta:
         model = UserQuery
-        fields = ['genre', 'title', 'author', 'description', 'format', 'language', 'number_of_pages', 'cover_color',
+        fields = ['name', 'genre', 'title', 'author', 'description', 'format', 'language', 'number_of_pages', 'cover_color',
                   'min_price', 'max_price']
         widgets = {
+            'name': forms.TextInput(attrs={'class': 'w-full py-4 px-6 rounded-xl border'}),
             'genre': forms.Select(attrs={'class': 'w-half py-4 px-6 rounded-xl border'}),
             'title': forms.TextInput(attrs={'class': 'w-full py-4 px-6 rounded-xl border'}),
             'author': forms.TextInput(attrs={'class': 'w-full py-4 px-6 rounded-xl border'}),
