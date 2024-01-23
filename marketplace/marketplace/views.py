@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from .forms import QueryForm
+from .forms import NewQueryForm, EditQueryForm
 from .models import UserQuery, Item
 
 # lista ricerche
@@ -45,14 +45,14 @@ def results(request, query_id):
 @login_required
 def new(request):
     if request.method == 'POST':
-        form = QueryForm(request.POST)     # salvo dati
+        form = NewQueryForm(request.POST)     # salvo dati
         if form.is_valid():
             query = form.save(commit=False)  # non salvo subito nel db perché non saprei chi ha creato il prodotto
             query.user = request.user
             query.save()
             return redirect(results, query_id=query.id)  # research salvata, redirect a risultati query
     else:   # se fosse una GET request
-        form = QueryForm()
+        form = NewQueryForm()
 
     return render(request, 'marketplace/form.html', {
         'form': form,
@@ -61,7 +61,19 @@ def new(request):
 
 @login_required
 def edit(request, query_id):
-    return
+    query = get_object_or_404(UserQuery, pk=query_id, user=request.user)
+    if request.method == 'POST':
+        form = EditQueryForm(request.POST, instance=query)
+        if form.is_valid():
+            form.save()
+            return redirect(results, query_id=query.id)
+    else:  # se fosse una GET request
+        form = EditQueryForm(instance=query)
+
+    return render(request, 'marketplace/form.html', {
+        'form': form,
+        'title': 'New research',
+    })
 
 @login_required
 def delete(request, query_id):

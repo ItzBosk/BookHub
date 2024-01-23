@@ -5,16 +5,37 @@ from django.db.models import Q
 @shared_task
 def run_user_queries():
     for user_query in UserQuery.objects.all():
-        query = Q()
-        for param, value in user_query.parameters.items():
-            query &= Q(**{param: value})
-        new_results = Item.objects.filter(query)
+
+        # costruzione filtro
+        query_filter = Q()
+        if user_query.title:
+            query_filter &= Q(title__icontains=user_query.title)
+        if user_query.author:
+            query_filter &= Q(author__icontains=user_query.author)
+        if user_query.description:
+            query_filter &= Q(description__icontains=user_query.description)
+
+        # se il campo è una ForeignKey
+        if user_query.genre:
+            query_filter &= Q(genre__name__icontains=user_query.genre.name)
+        if user_query.format:
+            query_filter &= Q(format__name__icontains=user_query.format.name)
+        if user_query.language:
+            query_filter &= Q(language__name__icontains=user_query.language.name)
+
+        # range di prezzo
+        if user_query.min_price is not None:
+            query_filter &= Q(price__gte=user_query.min_price)
+        if user_query.max_price is not None:
+            query_filter &= Q(price__lte=user_query.max_price)
+
+        new_results = Item.objects.filter(query_filter)
         existing_results = user_query.results.all()
 
-        # Check for new items not in existing results
-        new_items = new_results.exclude(id__in=existing_results)
+        # Find new items by excluding the IDs of the existing results
+        new_items = new_results.exclude(id__in=[item.id for item in existing_results])
 
         # Check if new results are found compared to the previous run
-        if new_results.exists():
-            print(f"New items found for User {user_query.user.username}'s search query!")
+        if new_items.exists():
+            print(f"New items found for user {user_query.user.username}'s search query!")
             user_query.results.add(*new_items)  # Add new items to the query's results

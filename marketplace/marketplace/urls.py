@@ -19,4 +19,5 @@ urlpatterns = [
     path('form/', views.new, name='new_research'),
     path('query_results/<int:query_id>/', views.results, name='results'),
     path('delete/<int:query_id>/', views.delete, name='delete'),
+    path('edit/<int:query_id>/', views.edit, name='edit'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)    # gestione immagini
