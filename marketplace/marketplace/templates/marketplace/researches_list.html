@@ -3,24 +3,47 @@
 {% block title %}Researches{% endblock %}
 
 {% block content %}
-<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl research-container">
-        <h2 class="mb-12 text-2xl text-center">My researches</h2>
+<style>
+    .bg-accent { background-color: #83c5be; }
+    .hover\:bg-accent:hover { background-color: #71a9a1; }
+    .bg-main-hover:hover { background-color: #005662; } /* New class for hover state */
+    /* Additional custom styles */
+    .research-container {
+        background-color: #edf2f4;
+        padding-top: 2rem; /* Adjust the padding to increase space above the title */
+        padding-bottom: 2rem; /* Space at the bottom */
+    }
+    .new-research-btn {
+        margin-left: 2rem; /* Adjust as needed for space on the left */
+    }
+    .query-box {
+        max-width: none; /* Remove max-width to allow it to fill the container */
+        width: calc(100% - 4rem); /* Full width minus padding */
+        margin: 1rem 2rem; /* Consistent margin */
+    }
+</style>
 
-        <div class="mb-6">
-            <a href="{% url 'new_research' %}" class="new-research-btn px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">New research</a>
-        </div>
+<div class="research-container rounded-xl">
+    <h2 class="mb-6 text-2xl text-center">My researches</h2>
 
-        <div class="grid grid-cols-1 gap-3">
-            {% for query in past_queries %}
-                <div class="query-box p-4 border border-gray-300 rounded-lg flex justify-between items-center">
-                    <span class="text-lg">{{ query.name }}</span>
-                    <div>
-                        <a href="{% url 'results' query.id %}" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">View Results</a>
-                        <a href="{% url 'edit' query.id %}" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Edit</a>
-                        <a href="{% url 'delete' query.id %}" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Delete</a>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+    <div class="mb-4">
+        <a href="{% url 'new_research' %}" class="new-research-btn px-6 py-3 text-lg font-semibold bg-accent text-white rounded-xl hover:bg-[#71a9a1]">New research</a>
     </div>
+
+    {% for query in past_queries %}
+        <div class="query-box p-4 border border-gray-300 rounded-lg flex justify-between items-center">
+            <span class="text-lg">{{ query.name }}</span>
+            <div>
+                <a href="{% url 'results' query.id %}" class="px-4 py-2 bg-main text-white font-semibold rounded-xl hover:bg-[#005662]">View Results</a>
+                <a href="{% url 'edit' query.id %}" class="px-4 py-2 bg-accent text-white font-semibold rounded-xl hover:bg-[#71a9a1]">Edit</a>
+                <a href="{% url 'delete' query.id %}" class="px-4 py-2 bg-[#e57373] text-white font-semibold rounded-lg hover:bg-[#ef9a9a]">Delete</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block footer %}
+<!-- Empty block to not display any footer -->
 {% endblock %}

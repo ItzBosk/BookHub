@@ -10,16 +10,18 @@
 
         <div class="grid grid-cols-3 gap-3">
             {% for item in items %}
-                <div class="item-container bg-white rounded-xl overflow-hidden shadow-lg">
+                <!-- L'elemento <a> ora racchiude tutto il contenuto del rettangolo -->
+                <a href="{% url 'item:detail' item.id %}" class="item-container bg-white rounded-xl overflow-hidden shadow-lg">
                     <div class="image-container">
+                        <!-- Assicurati che il percorso dell'immagine e l'alt text siano corretti -->
                         <img src="{{ item.image.url }}" alt="{{ item.title }}" class="object-cover h-48 w-full">
                     </div>
                     <div class="info-container p-4">
+                        <!-- I dettagli dell'item come il titolo e il prezzo -->
                         <p class="text-gray-900 leading-none">{{ item.title }}</p>
                         <p class="text-gray-600">Price: €{{ item.price }}</p>
-                        <!-- Add more information here as needed -->
                     </div>
-                </div>
+                </a>
             {% endfor %}
         </div>
     </div>
