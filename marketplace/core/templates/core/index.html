@@ -5,29 +5,63 @@
 
 {% block content %}
     <!-- prodotti in homepage -->
-    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <div class="mt-6 px-6 py-12 bg-custom-nav rounded-xl">
         <h2 class="mb-12 text-2xl text-center">Newest items</h2>
 
         <div class="grid grid-cols-3 gap-3">
             {% for item in items %}
-                <div>
-                    <a href="{% url 'item:detail' item.id %}">
-                        <!-- immagine prodotto -->
-                        <div style="width: 250px; height: 300px;">
-                            <img src="{{ item.image.url }}" class="rounded-t-xl" style="width: 250px; height: 300px;">
-                        </div>
-                        <!-- nome e prezzo -->
-                        <div class="p-6 bg-white rounded-b-xl" style="width: 250px; height: 300px;">
-                            <h2 class="text-2xl">{{ item.title }}</h2>
-                            <p class="text-gray-500">Price: {{ item.price }}$ </p>
-                        </div>   
-                    </a>
+                <div class="item-container bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="image-container">
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="object-cover h-48 w-full">
+                    </div>
+                    <div class="info-container p-4">
+                        <p class="text-gray-900 leading-none">{{ item.title }}</p>
+                        <p class="text-gray-600">Price: €{{ item.price }}</p>
+                        <!-- Add more information here as needed -->
+                    </div>
                 </div>
             {% endfor %}
         </div>
     </div>
 
-    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <style>
+      .bg-custom-nav { background-color: #edf2f4; }
+      .bg-custom-footer { background-color: #edf2f4; }
+      .bg-main { background-color: #006d77; }
+      .text-main { color: #edf6f9; }
+      .bg-accent { background-color: #83c5be; }
+      .hover\:bg-accent:hover { background-color: #83c5be; }
+
+      .item-container {
+          /* Adjust the width and margin as needed */
+          width: 250px; /* Example width */
+          margin: auto; /* Centers the container */
+          transition: background-color 0.3s ease;
+      }
+      .item-container:hover {
+          background-color: #83c5be; /* The color you want on hover */
+         }
+        .image-container {
+            /* This padding will create space around the image */
+            padding: 16px; /* Adjust the amount of padding as needed */
+        }
+        .image-container img {
+            /* Adjust height as needed */
+            height: 300px; /* Example height */
+        }
+
+        .info-container {
+            /* Styling for the text and padding */
+            text-align: center;
+            padding: 1rem;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+    <div class="mt-6 px-6 py-12 bg-custom-nav rounded-xl">
         <h2 class="mb-12 text-2xl text-center">Genres</h2>
 
         <div class="grid grid-cols-3 gap-3">
@@ -35,10 +69,10 @@
                 <div>
                     <a href="#">
                         <!-- titolo e prezzo -->
-                        <div class="p-6 bg-white rounded-b-xl">
+                        <div class="p-6 bg-white rounded-xl hover:bg-accent">
                             <h2 class="text-2xl">{{ genre.name }}</h2>
                             <p class="text-gray-500">{{ genre.items.count }} items</p>   <!-- conta libri di quel genere -->
-                        </div>   
+                        </div>
                     </a>
                 </div>
             {% endfor %}
