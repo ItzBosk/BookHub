@@ -16,4 +16,5 @@ urlpatterns = [
     path('user_past_queries/', past_researches, name='past_researches'),
     path('results/', results, name='results'),
     path('delete/', delete, name='delete'),
+    path('signout/', views.signout, name='signout'),
 ]

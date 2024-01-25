@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import logout
 from item.models import Genre, Item
 from .forms import SignupForm
 
@@ -30,3 +31,7 @@ def signup(request):
         form = SignupForm()
 
     return render(request, 'core/signup.html', {'form': form})
+
+def signout(request):
+    logout(request)  # Chiude la sessione dell'utente
+    return redirect('core:index')  # Reindirizza alla home page
