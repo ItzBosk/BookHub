@@ -32,10 +32,11 @@ def run_user_queries():
         new_results = Item.objects.filter(query_filter)
         existing_results = user_query.results.all()
 
+        # trova nuovi prodotti escludendo gli ID di quelli che erano già presenti
         # Find new items by excluding the IDs of the existing results
         new_items = new_results.exclude(id__in=[item.id for item in existing_results])
 
-        # Check if new results are found compared to the previous run
+        # controlla se ci sono dei nuovi prodotti rispetto all'esecuzione precedente
         if new_items.exists():
             print(f"New items found for user {user_query.user.username}'s search query!")
-            user_query.results.add(*new_items)  # Add new items to the query's results
+            user_query.results.add(*new_items)  # se ci sono li aggiunge ai risultati della ricerca

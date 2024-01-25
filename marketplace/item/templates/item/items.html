@@ -1,59 +1,84 @@
 {%  extends 'core/base.html' %}
 {%  block title %}Items{%  endblock %}
 {%  block content %}
-    <div class="pb-6 grid grid-cols-4 gap-4 bg-gray-100">
-        <div class="col-span-1">    <!-- sidebar filter search -->
-            <form method="get" action="{%  url 'item:items' %}">    <!-- GET quindi non serve token CSRF -->
-                <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}" placeholder="Find your next book ...">
-                <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Search</button>
+    <style>
+        .bg-custom-nav { background-color: #edf2f4; }
+        .bg-custom-footer { background-color: #edf2f4; }
+        .bg-main { background-color: #006d77; }
+        .text-main { color: #edf6f9; }
+        .bg-accent { background-color: #83c5be; }
+        .hover\:bg-accent:hover { background-color: #83c5be; }
+
+        .item-container {
+          width: 250px;
+          margin: auto;
+          transition: background-color 0.3s ease;
+        }
+        .item-container:hover {
+          background-color: #83c5be;
+         }
+        .image-container {
+            padding: 16px;
+        }
+        .image-container img {
+            height: 300px;
+        }
+
+        .info-container {
+            text-align: center;
+            padding: 1rem;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+    <div class="container mx-auto mt-6 px-6 py-12 bg-custom-nav rounded-xl">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <!-- Sidebar for search and filters -->
+        <div class="md:col-span-1 bg-white p-6 rounded-xl shadow-lg">
+            <!-- Search form -->
+            <form method="get" action="{% url 'item:items' %}" class="mb-6">
+                <input name="query" class="w-full py-4 px-6 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-[#005662]" type="text" value="{{ query }}" placeholder="Find your next book ...">
+                <button class="mt-2 px-6 py-3 text-lg font-semibold bg-main text-white rounded-xl hover:bg-[#005662]">Search</button>
             </form>
 
-            <hr class="my-6">
-
-            <p class="font-semibold">Genres</p>
-
-            <!-- unordered (bulleted) list -->
-            <ul>
-                {%  for genre in genres %}
-                    <!-- lista di elementi -->
-                    <li class="py-2 px-2 rounded-xl{%  if genre.id == genre_id %} bg-gray-200 {% endif %}">
-                        <a href="{% url 'item:items' %}?query={{ query }}&genre={{ genre.id }}">{{ genre.name }}</a>
-                    </li>
-                {%  endfor %}
-            </ul>
-
-            <hr class="my-6">
-            <p class="font-semibold">Clear filters</p>
-            <ul>
-                <li>
-                    <a href="{%  url 'item:items' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Clear</a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- risultati ricerca -->
-        <div class="col-span-3">
-            <div class="grid grid-cols-3 gap-3">
-            {% for item in items %}
-                <div>
-                    <a href="{% url 'item:detail' item.id %}">
-                        <!-- immagine prodotto -->
-                        <div>
-                            <img src="{{ item.image.url }}" class="rounded-t-xl">
-                        </div>
-                        <!-- nome e prezzo -->
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="text-2xl">{{ item.name }}</h2>
-                            <p class="text-gray-500">Price: {{ item.price }}</p>
-                        </div>
+            <!-- Genres list -->
+            <p class="font-semibold mb-4">Genres</p>
+            <ul class="mb-6">
+                {% for genre in genres %}
+                <li class="{% if genre.id == genre_id %}bg-gray-200 {% endif %}py-2 px-4 rounded-md mb-2">
+                    <a href="{% url 'item:items' %}?genre={{ genre.id }}" class="hover:text-main">
+                        {{ genre.name }}
                     </a>
-                </div>
-            {% endfor %}
+                </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Clear filters button -->
+            <a href="{% url 'item:items' %}" class="block w-full px-6 py-3 bg-yellow-500 text-lg text-white font-semibold rounded-xl text-center hover:bg-opacity-90">Clear Filters</a>
         </div>
+
+        <!-- Items grid -->
+        <div class="md:col-span-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for item in items %}
+                <a href="{% url 'item:detail' item.id %}" class="item-container bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="image-container">
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="object-cover h-48 w-full">
+                    </div>
+                    <div class="info-container p-4">
+                        <p class="text-gray-900 leading-none">{{ item.title }}</p>
+                        <p class="text-gray-600">Price: €{{ item.price }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
+</div>
 {%  endblock %}
 
 {% block footer %}
-<!-- Qui lasci il blocco vuoto, quindi non verrà mostrato nessun footer -->
 {% endblock %}

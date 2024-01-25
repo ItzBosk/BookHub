@@ -10,14 +10,11 @@
 
         <div class="grid grid-cols-3 gap-3">
             {% for item in items %}
-                <!-- L'elemento <a> ora racchiude tutto il contenuto del rettangolo -->
                 <a href="{% url 'item:detail' item.id %}" class="item-container bg-white rounded-xl overflow-hidden shadow-lg">
                     <div class="image-container">
-                        <!-- Assicurati che il percorso dell'immagine e l'alt text siano corretti -->
                         <img src="{{ item.image.url }}" alt="{{ item.title }}" class="object-cover h-48 w-full">
                     </div>
                     <div class="info-container p-4">
-                        <!-- I dettagli dell'item come il titolo e il prezzo -->
                         <p class="text-gray-900 leading-none">{{ item.title }}</p>
                         <p class="text-gray-600">Price: €{{ item.price }}</p>
                     </div>
@@ -27,33 +24,29 @@
     </div>
 
     <style>
-      .bg-custom-nav { background-color: #edf2f4; }
-      .bg-custom-footer { background-color: #edf2f4; }
-      .bg-main { background-color: #006d77; }
-      .text-main { color: #edf6f9; }
-      .bg-accent { background-color: #83c5be; }
-      .hover\:bg-accent:hover { background-color: #83c5be; }
+        .bg-custom-nav { background-color: #edf2f4; }
+        .bg-custom-footer { background-color: #edf2f4; }
+        .bg-main { background-color: #006d77; }
+        .text-main { color: #edf6f9; }
+        .bg-accent { background-color: #83c5be; }
+        .hover\:bg-accent:hover { background-color: #83c5be; }
 
-      .item-container {
-          /* Adjust the width and margin as needed */
-          width: 250px; /* Example width */
-          margin: auto; /* Centers the container */
+        .item-container {
+          width: 250px;
+          margin: auto;
           transition: background-color 0.3s ease;
-      }
-      .item-container:hover {
-          background-color: #83c5be; /* The color you want on hover */
+        }
+        .item-container:hover {
+          background-color: #83c5be;
          }
         .image-container {
-            /* This padding will create space around the image */
-            padding: 16px; /* Adjust the amount of padding as needed */
+            padding: 16px;
         }
         .image-container img {
-            /* Adjust height as needed */
-            height: 300px; /* Example height */
+            height: 300px;
         }
 
         .info-container {
-            /* Styling for the text and padding */
             text-align: center;
             padding: 1rem;
         }

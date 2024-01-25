@@ -3,8 +3,8 @@
 {% block title %}Log in{%  endblock %}
 
 {% block content %}
-    <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
-        <h1 class="mb-6 text-3xl">Log in</h1>
+    <div class="w-1/2 my-6 mx-auto p-6 bg-[#edf2f4] rounded-xl">
+        <h1 class="mb-6 text-3xl text-center">Log in</h1>
         <!-- form per registrarsi gestita tramite http POST -->
         <form method="post" action=".">
             {% csrf_token %}    <!-- security in django against CSRF attack -->
@@ -29,8 +29,10 @@
                 </div>
             {% endif %}
 
-            <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit
-            </button>
+            <button class="mt-4 px-6 py-3 text-lg font-semibold bg-[#83c5be] text-white rounded-xl hover:bg-[#71a9a1]">Submit</button>
         </form>
     </div>
 {%  endblock %}
+
+{% block footer %}
+{% endblock %}
