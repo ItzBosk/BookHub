@@ -32,6 +32,12 @@
             max-width: 100%;
             height: auto;
         }
+        .language-link {
+            display: block;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
     </style>
 
     <div class="container mx-auto mt-6 px-6 py-12 bg-custom-nav rounded-xl">
@@ -51,6 +57,18 @@
                 <li class="{% if genre.id == genre_id %}bg-gray-200 {% endif %}py-2 px-4 rounded-md mb-2">
                     <a href="{% url 'item:items' %}?genre={{ genre.id }}" class="hover:text-main">
                         {{ genre.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Languages list -->
+            <p class="font-semibold mb-4">Languages</p>
+            <ul class="mb-6">
+                {% for language in languages %}
+                <li class="{% if language.id == language_id %}bg-gray-200 {% endif %}py-2 px-4 rounded-md mb-2"">
+                    <a href="{% url 'item:items' %}?language={{ language.id }}" class="language-link">
+                        {{ language.name }}
                     </a>
                 </li>
                 {% endfor %}

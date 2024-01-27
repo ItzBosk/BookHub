@@ -2,7 +2,7 @@ from django.db.models import Q      # permette tramite una query di cercare nell
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
-from .models import Item, Genre
+from .models import Item, Genre, Language
 from .forms import NewItemForm, EditItemForm
 
 # lista degli item non venduti
@@ -11,10 +11,16 @@ def items(request):
     genre_id = request.GET.get('genre', 0)
     genres = Genre.objects.all()
     items = Item.objects.filter(is_sold=False)
+    languages = Language.objects.all()
+    language_id = request.GET.get('language', 0)
 
     # ricerca per genere, mostra solo libri di quel genere
     if genre_id:
         items = items.filter(genre_id=genre_id)
+
+    # ricerca per lingua, mostra solo libri di quella lingua
+    if language_id:
+        items = items.filter(language_id=language_id)
 
     # filtro le query con titolo o descrizione oggetto
     if query:
@@ -25,7 +31,9 @@ def items(request):
         'items': items,
         'query': query,
         'genres': genres,
-        'genre_id' : int(genre_id)
+        'genre_id' : int(genre_id),
+        'languages': languages,
+        'language_id': int(language_id)
     })
 
 # ricerca elemento in base a richiesta e primary key
