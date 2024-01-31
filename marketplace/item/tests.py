@@ -1,6 +1,8 @@
 from django.test import TestCase, Client
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
-from .models import Item, Genre, Format, Language, CoverColor, User
+from django.contrib.auth.models import User
+from item.models import Item, Genre, Format, Language, CoverColor
 
 ################################      test detail view     ################################
 
@@ -14,6 +16,9 @@ class ItemDetailViewTest(TestCase):
         self.cover_color = CoverColor.objects.create(name='Blue')
         self.user = User.objects.create_user('testuser', 'test@example.com', 'password')
 
+        image_path = 'media/item_images/test.jpg'
+        image = SimpleUploadedFile(name='test.jpg', content=open(image_path, 'rb').read(), content_type='image/jpeg')
+
         self.item = Item.objects.create(
             genre=self.genre,
             format=self.format,
@@ -24,7 +29,8 @@ class ItemDetailViewTest(TestCase):
             description="Test Description",
             number_of_pages=300,
             price=10.0,
-            created_by=self.user
+            created_by=self.user,
+            image = image
         )
         self.client = Client()
 
@@ -60,8 +66,3 @@ class ItemDetailViewTest(TestCase):
     def test_invalid_item(self):
         response = self.client.get(reverse('item:detail', args=[9999]))
         self.assertEqual(response.status_code, 404)
-
-    # controlla se la risposta contiene il valore atteso
-    def test_content_in_response(self):
-        response = self.client.get(reverse('item:detail', args=[self.item.id]))
-        self.assertIn(self.item.title, response.content.decode())

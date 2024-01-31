@@ -5,7 +5,7 @@ from django.urls import path, include
 
 from . import views
 from .forms import LoginForm
-from marketplace.views import *
+from config.views import *
 
 app_name = 'core'
 urlpatterns = [

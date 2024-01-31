@@ -9,6 +9,7 @@ class Genre(models.Model):
     class Meta:
         ordering = ('name',)
         verbose_name_plural = 'Genres'
+        app_label = 'item'
 
     # nomi generi (override string representation)
     def __str__(self):
@@ -22,6 +23,7 @@ class Format(models.Model):
     class Meta:
         ordering = ('name',)
         verbose_name_plural = 'Formats'
+        app_label = 'item'
 
     def __str__(self):
         return self.name
@@ -34,6 +36,7 @@ class CoverColor(models.Model):
     class Meta:
         ordering = ('name',)
         verbose_name_plural = 'Cover colors'
+        app_label = 'item'
 
     def __str__(self):
         return self.name
@@ -46,6 +49,7 @@ class Language(models.Model):
     class Meta:
         ordering = ('name',)
         verbose_name_plural = 'Languages'
+        app_label = 'item'
 
     def __str__(self):
         return self.name

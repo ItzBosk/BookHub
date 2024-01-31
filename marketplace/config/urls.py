@@ -4,9 +4,9 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
-# from marketplace.core.views import index, contact
+# from config.core.views import index, contact
 
-app_name = 'marketplace'
+app_name = 'config'
 
 urlpatterns = [
     #path('', views.query_view, name='query_view'),

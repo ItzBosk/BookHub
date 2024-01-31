@@ -9,7 +9,7 @@ from .models import UserQuery, Item
 def past_researches(request):
     # Recuperare le ricerche passate dell'utente loggato
     past_queries = UserQuery.objects.filter(user=request.user)
-    return render(request, 'marketplace/researches_list.html', {'past_queries': past_queries})
+    return render(request, 'config/researches_list.html', {'past_queries': past_queries})
 
 # lista libri che soddisfano una ricerca
 @login_required
@@ -40,7 +40,7 @@ def results(request, query_id):
         query_filter &= Q(price__lte=user_query.max_price)
 
     items = Item.objects.filter(query_filter)
-    return render(request, 'marketplace/query_results.html', {'results': items})
+    return render(request, 'config/query_results.html', {'results': items})
 
 @login_required
 def new(request):
@@ -54,7 +54,7 @@ def new(request):
     else:   # se fosse una GET request
         form = NewQueryForm()
 
-    return render(request, 'marketplace/form.html', {
+    return render(request, 'config/form.html', {
         'form': form,
         'title': 'New research',
     })
@@ -70,7 +70,7 @@ def edit(request, query_id):
     else:  # se fosse una GET request
         form = EditQueryForm(instance=query)
 
-    return render(request, 'marketplace/form.html', {
+    return render(request, 'config/form.html', {
         'form': form,
         'title': 'New research',
     })
