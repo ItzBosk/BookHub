@@ -19,5 +19,8 @@ class UserQuery(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     results = models.ManyToManyField(Item, blank=True)  # store query results
 
+    class Meta:
+        app_label = 'config'
+
     def __str__(self):
         return f"Research: {self.name} made by: {self.user.username}"

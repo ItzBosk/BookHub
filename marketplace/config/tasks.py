@@ -8,6 +8,8 @@ def run_user_queries():
 
         # costruzione filtro
         query_filter = Q()
+
+        # campi liberi
         if user_query.title:
             query_filter &= Q(title__icontains=user_query.title)
         if user_query.author:
@@ -15,7 +17,7 @@ def run_user_queries():
         if user_query.description:
             query_filter &= Q(description__icontains=user_query.description)
 
-        # se il campo è una ForeignKey
+        # campi con dei preset
         if user_query.genre:
             query_filter &= Q(genre__name__icontains=user_query.genre.name)
         if user_query.format:
@@ -33,7 +35,6 @@ def run_user_queries():
         existing_results = user_query.results.all()
 
         # trova nuovi prodotti escludendo gli ID di quelli che erano già presenti
-        # Find new items by excluding the IDs of the existing results
         new_items = new_results.exclude(id__in=[item.id for item in existing_results])
 
         # controlla se ci sono dei nuovi prodotti rispetto all'esecuzione precedente

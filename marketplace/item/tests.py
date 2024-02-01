@@ -47,22 +47,22 @@ class ItemDetailViewTest(TestCase):
         self.assertEqual(self.item.price, 10.0)
         self.assertEqual(self.item.created_by, self.user)
 
-    # verifica la risposta HTTP 200 per un ID libro valido
+    """verifica la risposta HTTP 200 per un ID libro valido"""
     def test_response_status(self):
         response = self.client.get(reverse('item:detail', args=[self.item.id]))
         self.assertEqual(response.status_code, 200)
 
-    # controlla che l'oggetto item nel contesto contenga le informazioni corrette
+    """controlla che l'oggetto item nel contesto contenga le informazioni corrette"""
     def test_context_object(self):
         response = self.client.get(reverse('item:detail', args=[self.item.id]))
         self.assertEqual(response.context['item'].id, self.item.id)
 
-    # verifica la redirezione per un ID libro non valido
+    """verifica la redirezione per un ID libro non valido"""
     def test_template_used(self):
         response = self.client.get(reverse('item:detail', args=[self.item.id]))
         self.assertTemplateUsed(response, 'item/detail.html')
 
-    # controlla che venga utilizzato il template corretto
+    """controlla che venga utilizzato il template corretto"""
     def test_invalid_item(self):
         response = self.client.get(reverse('item:detail', args=[9999]))
         self.assertEqual(response.status_code, 404)
