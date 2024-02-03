@@ -3,8 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from item.models import Genre, Format, Language, CoverColor, Item
-from django.core.files.uploadedfile import SimpleUploadedFile
-
+from django.core.files.images import ImageFile
 
 """Test della vista della dashboard"""
 class DashboardViewTests(TestCase):
@@ -32,11 +31,7 @@ class DashboardItemsTest(TestCase):
         self.format = Format.objects.create(name="Hardcover")
         self.language = Language.objects.create(name="English")
         self.cover_color = CoverColor.objects.create(name="Red")
-        image_path = 'media/item_images/test.jpg'
-        with open(image_path, 'rb') as img:
-            image = SimpleUploadedFile(name='test_image.jpg', 
-                                       content=img.read(), 
-                                       content_type='image/jpeg')
+        image = ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg')
 
         self.item = Item.objects.create(
             title="Test Book",
@@ -50,6 +45,11 @@ class DashboardItemsTest(TestCase):
             image=image,
         )
         self.client = Client()
+
+    def tearDown(self):
+        # Elimina le immagini dopo il test
+        self.item.image.delete(save=False)
+        super().tearDown()
 
     """Verifica che l'utente visualizzi solo i propri libri nella dashboard"""
     def test_user_sees_own_items(self):
@@ -65,19 +65,48 @@ class DashboardItemsTest(TestCase):
         self.assertEqual(response.context['items'][0], self.item, "Il libro nella risposta non corrisponde al libro di test")
 
 
-"""class DashboardTemplateAndContextTest(TestCase):
+"""Test del template e del contesto della rispsota"""
+class DashboardTemplateAndContextTest(TestCase):
+
     def setUp(self):
-        User = get_user_model()
+        # creazione di un utente di test e login
         self.user = User.objects.create_user(username='testuser', password='12345')
         self.client.login(username='testuser', password='12345')
-        self.item = Item.objects.create(title="Test Book", created_by=self.user)
 
+        # creazione libro di test associato all'utente
+        self.genre = Genre.objects.create(name="Fantasy")
+        self.format = Format.objects.create(name="Hardcover")
+        self.language = Language.objects.create(name="English")
+        self.cover_color = CoverColor.objects.create(name="Red")
+        image = ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg')
+
+        self.item = Item.objects.create(
+            title="Test Book",
+            author="Author Test",
+            description="Test description",
+            genre=self.genre,
+            format=self.format,
+            language=self.language,
+            number_of_pages=123,
+            cover_color=self.cover_color,
+            price=29.99,
+            image=image,
+            created_by=self.user
+        )
+
+    def tearDown(self):
+        # Elimina le immagini dopo il test
+        self.item.image.delete(save=False)
+        super().tearDown()
+
+    """Test utilizzo del template corretto"""
     def test_uses_correct_template(self):
         response = self.client.get(reverse('dashboard:index'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'dashboard/index.html')
 
+    """Test contentuto del contesto della risposta"""
     def test_context_contains_user_items(self):
         response = self.client.get(reverse('dashboard:index'))
         self.assertIn('items', response.context)
-        self.assertIn(self.item, response.context['items'])"""
+        self.assertIn(self.item, response.context['items'])

@@ -3,22 +3,22 @@ from django.contrib.auth.models import User
 from config.models import UserQuery
 from item.models import Item, Genre, Format, Language, CoverColor
 from config.tasks import run_user_queries
-from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.files.images import ImageFile
+
 
 class RunUserQueriesTestCase(TestCase):
 
     def setUp(self):
 
-        # crea un utente per associare il libro creato
+        # crea un utente per associare il libro di test
         self.user = User.objects.create_user(username='testuser', email='test@example.com', password='password')
 
-        # crea le dipendenze necessarie per il libro
+        # crea un libro di test
         self.genre = Genre.objects.create(name='Fantasy')
         self.format = Format.objects.create(name='Hardcover')
         self.language = Language.objects.create(name='English')
         self.cover_color = CoverColor.objects.create(name='Blue')
 
-        # crea un libro di test
         self.item = Item.objects.create(
             genre=self.genre,
             title="Test Book",
@@ -29,11 +29,15 @@ class RunUserQueriesTestCase(TestCase):
             number_of_pages=100,
             cover_color=self.cover_color,
             price=20.00,
-            image=SimpleUploadedFile(name='test_image.jpg', content=open('media/item_images/test.jpg', 'rb').read(),
-                                     content_type='image/jpeg'),
+            image = ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg'),
             is_sold=False,
             created_by=self.user
         )
+
+    def tearDown(self):
+        # Elimina le immagini dopo il test
+        self.item.image.delete(save=False)
+        super().tearDown()
 
     """Verifica l'esecuzione del task senza UserQuery"""
     def test_run_with_no_user_queries(self):
