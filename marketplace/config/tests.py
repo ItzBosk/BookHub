@@ -15,7 +15,7 @@ class RunUserQueriesTestCase(TestCase):
 
         # crea un libro di test
         self.genre = Genre.objects.create(name='Fantasy')
-        self.format = Format.objects.create(name='Hardcover')
+        self.format = Format.objects.create(name='Print Book')
         self.language = Language.objects.create(name='English')
         self.cover_color = CoverColor.objects.create(name='Blue')
 

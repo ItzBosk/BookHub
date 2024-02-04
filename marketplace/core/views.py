@@ -14,7 +14,7 @@ def index(request):
     return render(request, 'core/index.html', {
         'genres': genres,
         'items': items,
-    })  # ritorna un template
+    })  # ritorna il template
 
 
 def contact(request):
@@ -23,13 +23,11 @@ def contact(request):
 def signup(request):
     if request.method == 'POST':    # allora vuol dire che ho compilato la form
         form = SignupForm(request.POST)
-
         if form.is_valid():     # se ho compilato correttamente, salvo i dati e creo utente nel db
             form.save()
             return redirect('/login/')  # dopo aver salvato i dati faccio redirect a login
     else:   # se non è una post, faccio vuoto
         form = SignupForm()
-
     return render(request, 'core/signup.html', {'form': form})
 
 def signout(request):
