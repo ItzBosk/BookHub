@@ -44,6 +44,7 @@ def results(request, query_id):
 
 @login_required
 def new(request):
+    # se la form è stata inviata con dei dati al suo interno    
     if request.method == 'POST':
         form = NewQueryForm(request.POST)     # salvo dati
         if form.is_valid():
