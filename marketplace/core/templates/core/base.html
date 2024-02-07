@@ -2,6 +2,7 @@
 
 <html>
     <head>
+        {% load static %}
         <meta charset="utf-8">
         <!-- gestione interfaccia anche da mobile -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
         <!-- Tailwind as a CDN -->
         <script src="https://cdn.tailwindcss.com"></script>
 
+        <link rel="shortcut icon" href="{% static 'logo.png' %}" type="image/png">
         <title>{% block title %}{% endblock %} | BookHub</title>
 
         <style>
@@ -25,7 +27,9 @@
     <body>
         <!-- titolo -->
         <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-100 bg-custom-nav">
-            <a href="/" class="text-xl font-semibold">BookHub</a>
+            <a href="/" class="flex items-center text-xl font-semibold">
+                <img src="{% static 'logo.png' %}" alt="Logo" class="mr-2" style="height: 50px;">BookHub
+            </a>
 
             <div class="space-x-6">     <!-- spazi fra gli items -->
 

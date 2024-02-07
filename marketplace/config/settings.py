@@ -130,6 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'  # used to generate URLs for static files in templates and code
+STATICFILES_DIRS = [BASE_DIR / 'static',]
 MEDIA_URL = 'media/'    # crea cartella per le immagini
 MEDIA_ROOT = BASE_DIR / 'media'     # posizione cartella immagini
 

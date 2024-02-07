@@ -1,11 +1,10 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
-from config.models import UserQuery
 from item.models import Item, Genre, Format, Language, CoverColor
 from config.tasks import run_user_queries
 from django.core.files.images import ImageFile
 from django.urls import reverse
-from config.models import UserQuery
+from .models import UserQuery
 from .forms import NewQueryForm, EditQueryForm
 
 
@@ -33,7 +32,7 @@ class RunUserQueriesTestCase(TestCase):
             number_of_pages=100,
             cover_color=self.cover_color,
             price=20.00,
-            image = ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg'),
+            image = ImageFile(open('static/test.jpg', 'rb'), name='test.jpg'),
             is_sold=False,
             created_by=self.user
         )
@@ -413,7 +412,7 @@ class ResultsQueryViewTest(TestCase):
             number_of_pages=100,
             cover_color=self.cover_color,
             price=20.00,
-            image = ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg'),
+            image = ImageFile(open('static/test.jpg', 'rb'), name='test.jpg'),
             is_sold=False,
             created_by=self.user
         )

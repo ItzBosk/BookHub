@@ -26,7 +26,7 @@ class IndexViewTest(TestCase):
             number_of_pages=100,
             cover_color=self.cover_color,
             price=20.00,
-            image=ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg'),
+            image=ImageFile(open('static/test.jpg', 'rb'), name='test.jpg'),
             is_sold=False,
             created_by=self.user
         )

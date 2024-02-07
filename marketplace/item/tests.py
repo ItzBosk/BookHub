@@ -16,7 +16,7 @@ class ItemDetailViewTest(TestCase):
         self.language = Language.objects.create(name='English')
         self.cover_color = CoverColor.objects.create(name='Blue')
         self.user = User.objects.create_user('testuser', 'test@example.com', 'password')
-        image = ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg')
+        image = ImageFile(open('static/test.jpg', 'rb'), name='test.jpg')
 
         self.item = Item.objects.create(
             genre=self.genre,
@@ -89,7 +89,7 @@ class ItemDeleteViewTest(TestCase):
         self.format = Format.objects.create(name='Ebook')
         self.language = Language.objects.create(name='Italian')
         self.cover_color = CoverColor.objects.create(name='Green')
-        image = ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg')
+        image = ImageFile(open('static/test.jpg', 'rb'), name='test.jpg')
 
         self.item = Item.objects.create(
             genre=self.genre,
@@ -260,7 +260,7 @@ class ItemListViewTest(TestCase):
         self.language = Language.objects.create(name='English')
         self.format = Format.objects.create(name='Ebook')
         self.cover_color = CoverColor.objects.create(name='Blue')
-        image = ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg')
+        image = ImageFile(open('static/test.jpg', 'rb'), name='test.jpg')
 
         self.item1 = Item.objects.create(
             title="Fantasy Book",

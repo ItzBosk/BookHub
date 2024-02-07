@@ -31,7 +31,7 @@ class DashboardItemsTest(TestCase):
         self.format = Format.objects.create(name="Hardcover")
         self.language = Language.objects.create(name="English")
         self.cover_color = CoverColor.objects.create(name="Red")
-        image = ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg')
+        image = ImageFile(open('static/test.jpg', 'rb'), name='test.jpg')
 
         self.item = Item.objects.create(
             title="Test Book",
@@ -78,7 +78,7 @@ class DashboardTemplateAndContextTest(TestCase):
         self.format = Format.objects.create(name="Hardcover")
         self.language = Language.objects.create(name="English")
         self.cover_color = CoverColor.objects.create(name="Red")
-        image = ImageFile(open('media/item_images/test.jpg', 'rb'), name='test.jpg')
+        image = ImageFile(open('static/test.jpg', 'rb'), name='test.jpg')
 
         self.item = Item.objects.create(
             title="Test Book",
