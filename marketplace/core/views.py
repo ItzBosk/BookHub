@@ -3,7 +3,6 @@ from django.contrib.auth import logout
 from item.models import Genre, Item
 from .forms import SignupForm
 
-from .forms import SignupForm
 
 # home page
 # request: info della richiesta (browser, GET/POST, ..), da mettere in ogni view
