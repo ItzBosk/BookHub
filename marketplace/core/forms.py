@@ -1,7 +1,7 @@
-#usato per creare utenti e validare
+# usato per creare utenti e validare
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User #db model
+from django.contrib.auth.models import User # db model
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -16,7 +16,7 @@ class LoginForm(AuthenticationForm):
 class SignupForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')    # pwd, repeat pwd
+        fields = ('username', 'email', 'password1', 'password2')    # pwd, ripeti pwd
 
     username = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Your username',

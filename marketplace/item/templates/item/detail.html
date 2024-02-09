@@ -10,8 +10,8 @@
         {% if item.image and item.image.url %}
             <img src="{{ item.image.url }}" class="rounded-xl" style="max-width: 80%; max-height: 80%;">
         {% else %}
-        <!-- Placeholder image or no image message -->
-        <img src="{% static 'static/placeholder.png' %}" class="rounded-xl" style="max-width: 80%; max-height: 80%;">
+        <!-- Placeholder se manca immagine -->
+        <img src="{% static 'placeholder.png' %}" class="rounded-xl" style="max-width: 80%; max-height: 80%;">
         {% endif %}
     </div>
 

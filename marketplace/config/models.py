@@ -17,7 +17,7 @@ class UserQuery(models.Model):
     min_price = models.FloatField(blank=True, null=True)
     max_price = models.FloatField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    results = models.ManyToManyField(Item, blank=True)  # store query results
+    results = models.ManyToManyField(Item, blank=True)  # salvataggi dei risultati delle query utente
 
     class Meta:
         app_label = 'config'

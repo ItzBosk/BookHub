@@ -4,15 +4,11 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
-# from config.core.views import index, contact
-
 app_name = 'config'
 
 urlpatterns = [
-    #path('', views.query_view, name='query_view'),
     path('', include('core.urls')),
     path('items/', include('item.urls')),   # collega ogni url che inizia con item al file item/urls.py
-    # path('contact/', contact, name='contact'),
     path('dashboard/', include('dashboard.urls')),
     path('admin/', admin.site.urls),
     path('researches_list/', views.past_researches, name='past_researches'),

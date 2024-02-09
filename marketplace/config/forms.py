@@ -4,7 +4,7 @@ from .models import UserQuery
 class NewQueryForm(forms.ModelForm):
     min_price = forms.FloatField(required=False, widget=forms.NumberInput(attrs={
         'class': 'w-half py-4 px-6 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-[#005662]',
-        'step': 'any',  # Allows decimal values
+        'step': 'any',  # permette valori decinali
     }))
     max_price = forms.FloatField(required=False, widget=forms.NumberInput(attrs={
         'class': 'w-half py-4 px-6 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-[#005662]',
@@ -32,7 +32,7 @@ class NewQueryForm(forms.ModelForm):
 class EditQueryForm(forms.ModelForm):
     min_price = forms.FloatField(required=False, widget=forms.NumberInput(attrs={
         'class': 'w-half py-4 px-6 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-[#005662]',
-        'step': 'any',  # Allows decimal values
+        'step': 'any',  # permette valori decimali
     }))
     max_price = forms.FloatField(required=False, widget=forms.NumberInput(attrs={
         'class': 'w-half py-4 px-6 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-[#005662]',

@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from .models import Genre, Item, Format, Language, CoverColor
 
 admin.site.register(Genre)

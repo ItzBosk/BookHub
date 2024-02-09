@@ -1,7 +1,6 @@
 from django.db.models import Q      # permette tramite una query di cercare nelle descrizioni degli oggetti
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-
 from .models import Item, Genre, Language
 from .forms import NewItemForm, EditItemForm
 

@@ -129,7 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'  # used to generate URLs for static files in templates and code
+STATIC_URL = 'static/'  # per file statici nei template
 STATICFILES_DIRS = [BASE_DIR / 'static',]
 MEDIA_URL = 'media/'    # crea cartella per le immagini
 MEDIA_ROOT = BASE_DIR / 'media'     # posizione cartella immagini
@@ -150,6 +150,6 @@ CELERY_TIMEZONE = 'UTC'
 CELERY_BEAT_SCHEDULE = {
     'run_user_queries': {
         'task': 'config.tasks.run_user_queries',
-        'schedule': timedelta(seconds=5),  # Run every 5 seconds
+        'schedule': timedelta(seconds=5),  # runna il background task ogni 5s
     },
 }
