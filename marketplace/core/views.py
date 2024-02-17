@@ -7,7 +7,7 @@ from .forms import SignupForm
 # home page
 # request: info della richiesta (browser, GET/POST, ..), da mettere in ogni view
 def index(request):
-    items = Item.objects.filter(is_sold=False)[0:6]  # solo quelli in vendita, max 6
+    items = Item.objects.filter(is_sold=False)[0:10]  # solo quelli in vendita, max 10
     genres = Genre.objects.all()  # tutti i generi
 
     return render(request, 'core/index.html', {

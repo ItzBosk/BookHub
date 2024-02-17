@@ -40,10 +40,10 @@
                     <a href="{% url 'dashboard:index' %}" class="px-6 py-3 text-lg font-semibold bg-accent text-white rounded-xl hover:bg-[#71a9a1]">Dashboard</a>
                     <a href="{% url 'item:items' %}" class="px-6 py-3 text-lg font-semibold bg-main text-white rounded-xl hover:bg-[#005662]">Browse</a>
                     <a href="{% url 'past_researches' %}" class="px-6 py-3 text-lg font-semibold bg-main text-white rounded-xl hover:bg-[#005662]">Researches</a>
-                    <a href="{% url 'core:signout' %}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-400">Sign out</a>
+                    <a href="{% url 'core:signout' %}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-400">Log out</a>
                 {% else %}
                     <a href="{% url 'item:items' %}" class="px-6 py-3 text-lg font-semibold bg-main text-white rounded-xl hover:bg-[#005662]">Browse</a>
-                    <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg font-semibold bg-accent text-white rounded-xl hover:bg-[#005662]">Sign up</a>
+                    <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg font-semibold bg-accent text-white rounded-xl hover:bg-[#005662]">Sign in</a>
                     <a href="{% url 'core:login' %}" class="px-6 py-3 text-lg font-semibold bg-accent text-white rounded-xl hover:bg-[#005662]">Log in</a>
                 {% endif %}
             </div>
